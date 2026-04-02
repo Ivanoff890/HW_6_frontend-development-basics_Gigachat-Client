@@ -1,38 +1,282 @@
-.App {
-  text-align: center;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: #1e1e2e;
+  color: #cdd6f4;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.app {
+  display: flex;
+  height: 100vh;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.sidebar {
+  width: 300px;
+  background: #181825;
+  border-right: 1px solid #313244;
   display: flex;
   flex-direction: column;
+  padding: 20px;
+  gap: 15px;
+  overflow-y: auto;
+}
+
+.new-chat-btn {
+  padding: 10px;
+  background: #89b4fa;
+  color: #1e1e2e;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.new-chat-btn:hover {
+  background: #74a7ec;
+}
+
+.search-input {
+  padding: 8px;
+  background: #313244;
+  border: 1px solid #45475a;
+  border-radius: 6px;
+  color: #cdd6f4;
+}
+
+.search-input::placeholder {
+  color: #6c7086;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #89b4fa;
+}
+
+.chats-list {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  overflow-y: auto;
+}
+
+.chat-item {
+  padding: 10px;
+  background: #1e1e2e;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.chat-item:hover {
+  background: #313244;
+}
+
+.chat-item.active {
+  background: #89b4fa;
+  color: #1e1e2e;
+}
+
+.chat-item.active .chat-preview {
+  color: #1e1e2e;
+}
+
+.chat-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+
+.chat-title {
+  flex: 1;
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.chat-actions {
+  display: flex;
+  gap: 4px;
+}
+
+.edit-btn, .delete-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 12px;
+  padding: 4px 6px;
+  border-radius: 4px;
+}
+
+.edit-btn:hover, .delete-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.edit-input {
+  flex: 1;
+  background: #313244;
+  border: 1px solid #89b4fa;
+  color: #cdd6f4;
+  padding: 4px;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.chat-preview {
+  font-size: 11px;
+  color: #a6adc8;
+  margin-top: 5px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: #1e1e2e;
+}
+
+.chat-window {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.messages-area {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.message {
+  max-width: 70%;
+  padding: 10px 15px;
+  border-radius: 12px;
+  animation: fadeIn 0.3s;
+}
+
+.message.user {
+  align-self: flex-end;
+  background: #89b4fa;
+  color: #1e1e2e;
+}
+
+.message.assistant {
+  align-self: flex-start;
+  background: #313244;
+}
+
+.message-content {
+  word-wrap: break-word;
+}
+
+.message-content pre {
+  background: #1e1e2e;
+  padding: 10px;
+  border-radius: 8px;
+  overflow-x: auto;
+  margin: 10px 0;
+}
+
+.message-content code {
+  font-family: 'Courier New', monospace;
+  font-size: 13px;
+}
+
+.message-content p {
+  margin: 5px 0;
+}
+
+.message-time {
+  font-size: 10px;
+  margin-top: 5px;
+  opacity: 0.7;
+}
+
+.input-area {
+  padding: 20px;
+  border-top: 1px solid #313244;
+  display: flex;
+  gap: 10px;
+  background: #1e1e2e;
+}
+
+.input-area textarea {
+  flex: 1;
+  padding: 10px;
+  background: #313244;
+  border: 1px solid #45475a;
+  border-radius: 8px;
+  color: #cdd6f4;
+  resize: none;
+  font-family: inherit;
+  font-size: 14px;
+}
+
+.input-area textarea:focus {
+  outline: none;
+  border-color: #89b4fa;
+}
+
+.input-area textarea:disabled {
+  opacity: 0.5;
+}
+
+.input-area button {
+  padding: 10px 20px;
+  background: #89b4fa;
+  color: #1e1e2e;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.input-area button:hover:not(:disabled) {
+  background: #74a7ec;
+}
+
+.input-area button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.loading {
+  text-align: center;
+  color: #a6adc8;
+  padding: 10px;
+}
+
+.empty-state {
+  flex: 1;
+  display: flex;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  color: #a6adc8;
+  font-size: 16px;
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
+@keyframes fadeIn {
   from {
-    transform: rotate(0deg);
+    opacity: 0;
+    transform: translateY(10px);
   }
   to {
-    transform: rotate(360deg);
+    opacity: 1;
+    transform: translateY(0);
   }
 }
